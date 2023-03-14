@@ -1,0 +1,41 @@
+---
+title: "DS4002_Project1"
+author: "Nathan Patton, Bruce Cao, Camden Miller"
+date: "2023-02-14"
+output: html_document
+---
+
+# Installing Programs
+```{r}
+install_tensorflow(extra_packages="pillow")
+install_keras()
+```
+
+# Loading in Libraries
+```{r}
+library(tidyverse)
+library(keras)
+library(tensorflow)
+library(reticulate)
+```
+
+# Loading in Training Data
+```{r}
+setwd("C:/Users/natha/Downloads/DS4002_Project2")
+label_list <- dir("train/")
+output_n <- length(label_list)
+save(label_list, file="label_list.R")
+```
+
+```{r}
+#Rescaling all images in pixels
+width <- 224
+height<- 224
+target_size <- c(width, height)
+rgb <- 3 #color channels
+```
+
+```{r}
+path_train <- "/train/"
+train_data_gen <- image_data_generator(rescale = 1/255, validation_split = .2)
+```
